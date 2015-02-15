@@ -1,3 +1,4 @@
+#include "blocks.h"
 #include <iostream>
 #include <ncurses.h>
 
