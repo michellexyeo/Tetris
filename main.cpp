@@ -1,9 +1,11 @@
 #include "blocks.h"
 #include "manager.h"
+#include "scoremaster.h"
 #include <iostream>
 #include <ncurses.h>
 
 int main() {
+	Scoremaster scoremaster;
     // FINDME enable double buffering?  
 	// ticking..
 	
@@ -30,7 +32,6 @@ int main() {
 	attroff(COLOR_PAIR(2));
 
 	// Draw main screen	
-	// weird thing about ncurses is that its y, x in drawing and not x, y
 	for (size_t i=10; i<(COLS-110); ++i) {
 		mvwprintw(win, 3, i, "-");
 		mvwprintw(win, LINES-3, i, "-");
@@ -39,6 +40,19 @@ int main() {
 		mvwprintw(win, j, 10, "|");
 		mvwprintw(win, j, COLS-111, "|");
 	}
+
+	// Draw score screen
+	for (size_t i=(COLS-80); i<(COLS-50); ++i) {
+		mvwprintw(win, 3, i, "-");
+		mvwprintw(win, 15, i, "-");
+	}
+	for (size_t j=4; j<15; ++j) {
+		mvwprintw(win, j, COLS-80, "|");
+		mvwprintw(win, j, COLS-51, "|");
+	}
+	mvwprintw(win, 5, COLS-79, "Score:");
+	mvwprintw(win, 6, COLS-79, std::to_string(scoremaster.getScore()).c_str());
+	
 
 	refresh();			
 	getch();
