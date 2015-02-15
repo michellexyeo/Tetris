@@ -23,3 +23,23 @@ void Manager::generate(int cols_, std::vector<int>& initParams_) {
 		std::cerr << e.what() << std::endl;
 	}
 }
+
+void Manager::tick() {
+
+	return;
+}
+
+void Manager::draw(WINDOW* win, int x_, int y_, const char _singleBlock) {
+
+	return;
+}
+
+void Manager::left() {
+
+	return;
+}
+
+void Manager::right() {
+
+	return;
+}
