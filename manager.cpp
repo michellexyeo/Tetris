@@ -2,20 +2,22 @@
 #include <cstdlib>
 #include <iostream>
 
-Manager::Manager() {}
+Manager::Manager() {
+	_orientation = 0;
+}
 
 Manager::~Manager() {}
 
 void Manager::generate(int cols_, std::vector<int>& initParams_) {
 	int startPos = rand() % cols_;
-	int shape = rand() % 7;
-	int orientation = rand() % 4;
+	_shape = rand() % 7;
+	_orientation = rand() % 4;
 	//std::vector<int> temp = {startPos, shape, orientation};
 	//FINDME why doesn't c++11 initialiser list syntax work?? bloody hell..
 	std::vector<int> temp;
 	temp.push_back(startPos);
-	temp.push_back(shape);
-	temp.push_back(orientation);
+	temp.push_back(_shape);
+	temp.push_back(_orientation);
 	try {
 		initParams_ = std::move(temp);
 	} catch (std::exception& e) {
@@ -29,7 +31,7 @@ void Manager::tick() {
 	return;
 }
 
-void Manager::draw(WINDOW* win, int x_, int y_, const char _singleBlock) {
+void Manager::draw(WINDOW* win, int y_, int x_, const char _singleBlock) {
 
 	return;
 }
@@ -42,4 +44,9 @@ void Manager::left() {
 void Manager::right() {
 
 	return;
+}
+
+void Manager::rotate() {
+	++_orientation;
+	_orientation %= 4;	
 }
