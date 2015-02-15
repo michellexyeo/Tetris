@@ -3,9 +3,10 @@
 
 int main() {
     // FINDME enable double buffering?  
+	// ticking..
 
 	// Set up ncurses 	
-	initscr();				
+	WINDOW* win = initscr();				
 	cbreak();
 	keypad(stdscr, TRUE);	
 	noecho();			
@@ -15,11 +16,15 @@ int main() {
 	init_pair(4, COLOR_BLUE, COLOR_BLACK);
 	init_pair(5, COLOR_GREEN, COLOR_BLACK);
 	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
 	attron(COLOR_PAIR(2));
 	attron(A_BOLD | A_BLINK);
-    printw("Tetris");
+    mvwprintw(win, 0, 0, "Tetris");
 	attroff(A_BOLD | A_BLINK);
+	for (size_t i=0; i<COLS; ++i) {
+		mvwprintw(win, 1, i, "-");		
+	}
 	attroff(COLOR_PAIR(2));
 	refresh();			
 	getch();
