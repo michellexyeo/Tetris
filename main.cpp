@@ -14,6 +14,11 @@ int main() {
 	cbreak();
 	keypad(stdscr, TRUE);	
 	noecho();			
+	if (!has_colors()) {
+		endwin();
+		std::cout << "Terminal doesn't support colour." << std::endl;
+	}
+	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_CYAN, COLOR_BLACK);
