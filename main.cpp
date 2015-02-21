@@ -10,6 +10,7 @@ namespace {
   		int x, y, i;
   		getmaxyx(screen, y, x);
   		// 4 corners
+		wattron(screen, COLOR_PAIR(2));
   		mvwprintw(screen, 0, 0, "+");
   		mvwprintw(screen, y - 1, 0, "+");
   		mvwprintw(screen, 0, x - 1, "+");
@@ -24,6 +25,7 @@ namespace {
 			mvwprintw(screen, 0, i, "-");
 			mvwprintw(screen, y - 1, i, "-");
 		}
+		wattroff(screen, COLOR_PAIR(2));
 	}
 } // namespace anon
 
@@ -57,20 +59,20 @@ int main() {
 	windows[0] = newwin(LINES-7, COLS-100, 4, 10);
 	windows[1] = newwin(12, 30, 4, COLS-50);
 	windows[2] = newwin(3, COLS, 0, 0); 
-	attron(COLOR_PAIR(2));
 	draw_borders(windows[0]);
 	draw_borders(windows[1]);
-	attron(A_BOLD | A_BLINK);
+	wattron(windows[2], A_BOLD | A_BLINK);
+	wattron(windows[2], COLOR_PAIR(2));
     mvwprintw(windows[2], 0, 0, "***Tetris***");
-	attroff(A_BOLD | A_BLINK);
-	attroff(COLOR_PAIR(2));
+	wattroff(windows[2], COLOR_PAIR(2));
+	wattroff(windows[2], A_BOLD | A_BLINK);
 	panels[0] = new_panel(windows[0]);
 	panels[1] = new_panel(windows[1]);
 	panels[2] = new_panel(windows[2]);
-	attron(COLOR_PAIR(3));
+	wattron(windows[1], COLOR_PAIR(3));
 	mvwprintw(windows[1], 1, 1, "Score:");
 	mvwprintw(windows[1], 2, 1, std::to_string(scoremaster.getScore()).c_str());
-	attron(COLOR_PAIR(3));
+	wattron(windows[1], COLOR_PAIR(3));
 	
 	update_panels();
 	doupdate();
