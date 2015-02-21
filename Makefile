@@ -3,7 +3,7 @@
 
 tetris : main.o manager.o scoremaster.o
 #		 cc -std=gnu++11 -o tetris main.o manager.o -lncurses
-		 clang++ -stdlib=libc++ -std=c++11 -o tetris main.o manager.o scoremaster.o -lncurses -Wc++11-extensions 
+		 clang++ -stdlib=libc++ -std=c++11 -o tetris main.o manager.o scoremaster.o -lpanel -lncurses -Wc++11-extensions 
 
 main.o : main.cpp blocks.h
 		 cc -c main.cpp

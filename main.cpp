@@ -33,7 +33,10 @@ int main() {
 	// ticking..
 	
 	// Set up ncurses 	
-	WINDOW* win = initscr();				
+	//WINDOW* win = initscr();				
+	WINDOW* windows[3];  
+	PANEL* panels[3];
+	initscr();
 	cbreak();
 	keypad(stdscr, TRUE);	
 	noecho();			
@@ -50,39 +53,27 @@ int main() {
 	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
+	// Create main screen and score screen	
+	windows[0] = newwin(LINES-7, COLS-100, 4, 10);
+	windows[1] = newwin(12, 30, 4, COLS-50);
+	windows[2] = newwin(3, COLS, 0, 0); 
 	attron(COLOR_PAIR(2));
+	draw_borders(windows[0]);
+	draw_borders(windows[1]);
 	attron(A_BOLD | A_BLINK);
-    mvwprintw(win, 0, 0, "***Tetris***");
+    mvwprintw(windows[2], 0, 0, "***Tetris***");
 	attroff(A_BOLD | A_BLINK);
-	for (size_t i=0; i<COLS; ++i) {
-		mvwprintw(win, 1, i, "-");		
-	}
 	attroff(COLOR_PAIR(2));
-
-	// Draw main screen	
-	for (size_t i=10; i<(COLS-110); ++i) {
-		mvwprintw(win, 3, i, "-");
-		mvwprintw(win, LINES-3, i, "-");
-	}
-	for (size_t j=4; j<(LINES-3); ++j) {
-		mvwprintw(win, j, 10, "|");
-		mvwprintw(win, j, COLS-111, "|");
-	}
-
-	// Draw score screen
-	for (size_t i=(COLS-80); i<(COLS-50); ++i) {
-		mvwprintw(win, 3, i, "-");
-		mvwprintw(win, 15, i, "-");
-	}
-	for (size_t j=4; j<15; ++j) {
-		mvwprintw(win, j, COLS-80, "|");
-		mvwprintw(win, j, COLS-51, "|");
-	}
-	mvwprintw(win, 5, COLS-79, "Score:");
-	mvwprintw(win, 6, COLS-79, std::to_string(scoremaster.getScore()).c_str());
+	panels[0] = new_panel(windows[0]);
+	panels[1] = new_panel(windows[1]);
+	panels[2] = new_panel(windows[2]);
+	attron(COLOR_PAIR(3));
+	mvwprintw(windows[1], 1, 1, "Score:");
+	mvwprintw(windows[1], 2, 1, std::to_string(scoremaster.getScore()).c_str());
+	attron(COLOR_PAIR(3));
 	
-
-	refresh();			
+	update_panels();
+	doupdate();
 	getch();
 	endwin();			
 
