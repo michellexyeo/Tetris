@@ -31,6 +31,7 @@ namespace {
 
 int main() {
 	Scoremaster scoremaster;
+	Manager manager;
     // FINDME enable double buffering?  
 	// ticking..
 	
@@ -76,8 +77,11 @@ int main() {
 	
 	update_panels();
 	doupdate();
-	getch();
-	endwin();			
+	int ch = getch();
+	while (ch != 'q') {
+		ch = getch();
 
+	}
+	endwin();			
 	return 0;
 }
