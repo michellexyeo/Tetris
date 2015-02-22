@@ -74,24 +74,47 @@ int main() {
 	int startx, starty, endx, endy;
 	getbegyx(windows[0], starty, startx);
 	getmaxyx(windows[0], endy, endx);
-	Manager manager(endx-startx);
+	Manager manager(endy - starty, endx - startx);
     // FINDME enable double buffering?  
 	// ticking..
 	
-	manager.begin(windows[0]);	
+	//manager.begin(windows[0]);	
 	
 	update_panels();
 	doupdate();
+	//int ch = getch();
 	int ch = getch();
-	/*
 	while (ch != 'q') {
-		manager.draw(windows[0], 1, 1);	
+		switch(ch) {
+			case ERR : {
+				manager.tick(windows[0]);
+				break;
+			}
+			case 'b' : {
+				manager.begin(windows[0]);
+				break;
+			}
+			case KEY_LEFT : {
+				manager.left();
+				manager.tick(windows[0]);
+				break;
+			}
+			case KEY_RIGHT : {
+				manager.right();
+				manager.tick(windows[0]);
+				break;
+			}
+			case KEY_UP : {
+				manager.rotate();
+				manager.tick(windows[0]);
+				break;
+			}
+			default : break;
+		}
 		ch = getch();
 		update_panels();
 		doupdate();
-
 	}
-	*/
 	endwin();			
 	return 0;
 }
