@@ -78,7 +78,7 @@ int main() {
     // FINDME enable double buffering?  
 	// ticking..
 	
-	manager.draw(windows[0], 1, 1);	
+	manager.begin(windows[0]);	
 	
 	update_panels();
 	doupdate();

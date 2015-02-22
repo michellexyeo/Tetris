@@ -12,6 +12,11 @@ Manager::Manager(int cols_)
 
 Manager::~Manager() {}
 
+void Manager::begin(WINDOW* win_) {
+	generate();
+	draw(win_, 1, _startPos);
+}
+
 void Manager::generate() {
 	_startPos = rand() % _cols;
 	_shape = rand() % 7;
