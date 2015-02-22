@@ -9,6 +9,10 @@ Manager::Manager(int rows_, int cols_)
 	_shape = 0;
 	_orientation = 0;
 	_deadShape = true;
+	for (int i = 0; i < _rows; ++i) {
+		std::vector<int> v(_cols, 0);
+		_matrix.push_back(v);
+	}
 }
 
 Manager::~Manager() {}
@@ -31,7 +35,10 @@ void Manager::tick(WINDOW* win_) {
 		begin(win_);
 		_deadShape = false;
 	}
-	draw(win_, ++_y, _x);			
+	++_y;
+	
+	// collision detection and check for end of grid
+	draw(win_, _y, _x);			
 	return;
 }
 
@@ -66,6 +73,14 @@ void Manager::right() {
 void Manager::rotate() {
 	++_orientation;
 	_orientation %= 4;	
+}
+
+int Manager::getRows() {
+	return _rows;
+}
+
+int Manager::getCols() {
+	return _cols;
 }
 
 bool Manager::getDeadShape() {
