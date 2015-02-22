@@ -31,10 +31,6 @@ namespace {
 
 int main() {
 	Scoremaster scoremaster;
-	Manager manager;
-    // FINDME enable double buffering?  
-	// ticking..
-	
 	// Set up ncurses 	
 	//WINDOW* win = initscr();				
 	WINDOW* windows[3];  
@@ -75,6 +71,13 @@ int main() {
 	mvwprintw(windows[1], 2, 1, std::to_string(scoremaster.getScore()).c_str());
 	wattron(windows[1], COLOR_PAIR(3));
 
+	int startx, starty, endx, endy;
+	getbegyx(windows[0], starty, startx);
+	getmaxyx(windows[0], endy, endx);
+	Manager manager(endx-startx);
+    // FINDME enable double buffering?  
+	// ticking..
+	
 	manager.draw(windows[0], 1, 1);	
 	
 	update_panels();
