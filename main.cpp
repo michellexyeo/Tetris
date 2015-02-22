@@ -74,14 +74,21 @@ int main() {
 	mvwprintw(windows[1], 1, 1, "Score:");
 	mvwprintw(windows[1], 2, 1, std::to_string(scoremaster.getScore()).c_str());
 	wattron(windows[1], COLOR_PAIR(3));
+
+	manager.draw(windows[0], 1, 1);	
 	
 	update_panels();
 	doupdate();
 	int ch = getch();
+	/*
 	while (ch != 'q') {
+		manager.draw(windows[0], 1, 1);	
 		ch = getch();
+		update_panels();
+		doupdate();
 
 	}
+	*/
 	endwin();			
 	return 0;
 }

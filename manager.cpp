@@ -3,6 +3,8 @@
 #include <iostream>
 
 Manager::Manager() {
+	_singleBlock = 'x';
+	_shape = 0;
 	_orientation = 0;
 }
 
@@ -31,8 +33,15 @@ void Manager::tick() {
 	return;
 }
 
-void Manager::draw(WINDOW* win, int y_, int x_, const char _singleBlock) {
-
+void Manager::draw(WINDOW* win, int y_, int x_) {
+	for (size_t i=0; i<4; ++i) {
+		for (size_t j=0; j<4; ++j) { if (Blocks[_shape][_orientation][i][j] != 0) {
+				wattron(win, A_BOLD | COLOR_PAIR(Blocks[_shape][_orientation][i][j]));
+				mvwprintw(win, y_ + i, x_ + j, &_singleBlock);	
+				wattroff(win, A_BOLD | COLOR_PAIR(Blocks[_shape][_orientation][i][j]));
+			}
+		}
+	}
 	return;
 }
 
