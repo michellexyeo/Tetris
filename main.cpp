@@ -83,36 +83,39 @@ int main() {
 	update_panels();
 	doupdate();
 	//int ch = getch();
-	int ch = getch();
-	while (ch != 'q') {
+	int ch;
+	while ((ch = getch()) != 'q') {
 		switch(ch) {
 			case ERR : {
 				manager.tick(windows[0]);
+				update_panels();
 				break;
 			}
 			case 'b' : {
 				manager.begin(windows[0]);
+				update_panels();
 				break;
 			}
 			case KEY_LEFT : {
 				manager.left();
 				manager.tick(windows[0]);
+				update_panels();
 				break;
 			}
 			case KEY_RIGHT : {
 				manager.right();
 				manager.tick(windows[0]);
+				update_panels();
 				break;
 			}
 			case KEY_UP : {
 				manager.rotate();
 				manager.tick(windows[0]);
+				update_panels();
 				break;
 			}
 			default : break;
 		}
-		ch = getch();
-		update_panels();
 		doupdate();
 	}
 	endwin();			
