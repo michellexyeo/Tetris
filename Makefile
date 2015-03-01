@@ -14,4 +14,4 @@ manager.o : manager.cpp manager.h blocks.h
 scoremaster.o : scoremaster.cpp scoremaster.h
 
 clean : 
-	rm tetris main.o manager.o
+	rm tetris *.o

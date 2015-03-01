@@ -36,8 +36,11 @@ void Manager::tick(WINDOW* win_) {
 		_deadShape = false;
 	}
 	++_y;
-	
+
 	// collision detection and check for end of grid
+	if (_y == _rows) {
+		_deadShape = true;
+	}
 	draw(win_, _y, _x);			
 	return;
 }
@@ -55,17 +58,17 @@ void Manager::draw(WINDOW* win, int y_, int x_) {
 }
 
 void Manager::left() {
-	++_x;
-	if (_x > _cols) {
-		_x = _cols;
+	--_x;
+	if (_x < 1) {
+		_x = 1;
 	}
 	return;
 }
 
 void Manager::right() {
-	--_x;
-	if (_x < 1) {
-		_x = 1;
+	++_x;
+	if (_x > _cols) {
+		_x = _cols;
 	}
 	return;
 }

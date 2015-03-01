@@ -78,15 +78,13 @@ int main() {
     // FINDME enable double buffering?  
 	// ticking..
 	
-	//manager.begin(windows[0]);	
-	
 	update_panels();
 	doupdate();
-	//int ch = getch();
 	int ch;
 	while ((ch = getch()) != 'q') {
 		switch(ch) {
 			case ERR : {
+				std::cerr << "hi" << std::endl;
 				manager.tick(windows[0]);
 				update_panels();
 				break;
