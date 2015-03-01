@@ -37,7 +37,7 @@ int main() {
 	PANEL* panels[3];
 	initscr();
 	cbreak();
-	halfdelay(1);
+	halfdelay(8);
 	keypad(stdscr, TRUE);	
 	noecho();			
 	if (!has_colors()) {
@@ -82,15 +82,18 @@ int main() {
 	update_panels();
 	doupdate();
 	int ch;
+	bool start = false;
 	while ((ch = getch()) != 'q') {
 		switch(ch) {
 			case ERR : {
-				std::cerr << "hi" << std::endl;
-				manager.tick(windows[0]);
-				update_panels();
+				if (start) {
+					manager.tick(windows[0]);
+					update_panels();
+				}
 				break;
 			}
 			case 'b' : {
+				start = true;
 				manager.begin(windows[0]);
 				update_panels();
 				break;

@@ -19,6 +19,7 @@ Manager::~Manager() {}
 
 void Manager::begin(WINDOW* win_) {
 	generate();
+	_deadShape = false;
 	draw(win_, 1, _startPos);
 }
 
