@@ -37,6 +37,7 @@ int main() {
 	PANEL* panels[3];
 	initscr();
 	cbreak();
+	halfdelay(1);
 	keypad(stdscr, TRUE);	
 	noecho();			
 	if (!has_colors()) {
